@@ -32,13 +32,24 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
   }
+  ngOnInit(){
+    // this.getAuth().subscribe(response=>{
+    //   this.isSignedin$.next(response.authenticated)
+    // })
+  }
 
   usernameAvailable(username: string) {
     return this.http.post<UsernameAvailable>(`${this.baseUrl}/username`, {
       username,
     });
   }
-
+  getAuth(){
+    return this.http.get<SignedinResponse>(`${this.baseUrl}/signedin`).pipe(
+      tap(({authenticated})=>{
+        this.isSignedin$.next(authenticated)
+      })
+    )
+  }
   signup(credencials:SignupCredentials){
     return this.http.post<SignupReponse>(`${this.baseUrl}/signup`, credencials)
     .pipe(
