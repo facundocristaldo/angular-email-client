@@ -1,0 +1,6 @@
+<button (click)="showModal = true" class="ui button inverted primary fluid">Compose email</button>
+
+<app-modal *ngIf="showModal" (dismiss)="dismissModal()">
+  <h1 modalTitle>Compose</h1>
+  <app-email-form [email]="email" (emailSubmit)="onSubmit($event)"></app-email-form>
+</app-modal>

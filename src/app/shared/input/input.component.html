@@ -1,1 +1,27 @@
-<p>input works!</p>
+<div class="field">
+  <label>{{ label }}</label>
+  
+  
+  <input *ngIf="controlType==='input'" [formControl]="control" type="inputType"/>
+  <textarea *ngIf="controlType==='textarea'" [formControl]="control"></textarea>
+
+  <div *ngIf="showErrors()" class="ui pointing basic red label">
+
+    <p *ngIf="control.errors.required">
+      Value is required
+    </p>
+    <p *ngIf="control.errors.minlength">
+      Value enter is {{control.errors.minlength.actualLength}} characters long but must be at least {{control.errors.minlength.requiredLength}} characters.
+    </p>
+    <p *ngIf="control.errors.maxlength">
+      Value enter is {{control.errors.maxlength.actualLength}} characters long but must be at most {{control.errors.maxlength.requiredLength}} characters.
+    </p>
+    <p *ngIf="control.errors.pattern">
+      Invalid format
+    </p>
+    <p *ngIf="control.errors.email">
+      Enter a valid email
+    </p>
+    <!-- TODO: Add more error showing -->
+  </div>
+</div>
